@@ -1,0 +1,48 @@
+/* Header */
+.header{
+   padding: 25px 0;
+}
+.nav{
+   display: flex;
+   justify-content: space-between;
+   align-items:center;
+}
+.menu-link{
+   font-size: 24px;
+   color: white;
+   text-transform: uppercase;
+   text-decoration: none;
+}
+
+/* Main */
+
+.product-block{
+   padding: 30px;
+   text-align: center;
+}
+.product-block span,
+.product-block a{
+   display: block;
+   padding: 10px 0;
+   color:white;
+}
+.name-abon{
+   font-size: 26px;
+}
+
+.abon-info{
+   font-size: 20px;
+}
+
+.abon-link{
+   text-decoration: none;
+   color: blue;
+}
+
+/* Footer */
+.footer{
+   font-size: 24px;
+   line-height: 29px;
+   padding: 25px 0;
+   color: white;
+}

@@ -1,0 +1,41 @@
+/* Header */
+.header{
+   padding: 25px 0;
+}
+.nav{
+   display: flex;
+   justify-content: space-between;
+   align-items:center;
+}
+.menu-link{
+   font-size: 24px;
+   color: white;
+   text-transform: uppercase;
+   text-decoration: none;
+}
+
+/* Main */
+.first_section{
+   background: url(../img/section1.jpg) center center no-repeat;
+   background-size: cover;
+}
+.first-section-text{
+   font-weight: 700;
+   font-size: 80px;
+   padding: 136px 0 100px;
+   color: white;
+   line-height: 96px;
+}
+
+.register-btn{
+   padding-bottom: 200px;
+}
+
+
+/* Footer */
+.footer{
+   font-size: 24px;
+   line-height: 29px;
+   padding: 25px 0;
+   color: white;
+}
