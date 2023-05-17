@@ -4,7 +4,6 @@ export declare class Client {
     id: number;
     fullname: string;
     age: number;
-    isSubscribe: boolean;
     trainers: Trainer[];
     subcribes: Subscribe[];
 }

@@ -33,10 +33,11 @@ let ClientService = class ClientService {
         const subscribes = await this.subscribeRepository.findBy({
             id: (0, typeorm_2.In)(clientDto.subscribes)
         });
-        const trainers = await this.clientRepository.findBy({
+        const trainers = await this.trainerRepository.findBy({
             id: (0, typeorm_2.In)(clientDto.trainers)
         });
         client.subcribes = subscribes;
+        client.trainers = trainers;
         await this.clientRepository.save(client);
         return client;
     }
@@ -50,13 +51,12 @@ let ClientService = class ClientService {
         });
     }
     async findAll() {
-        const clients = await this.clientRepository.find({
+        return await this.clientRepository.find({
             relations: {
                 subcribes: true,
                 trainers: true,
             },
         });
-        return clients;
     }
     async update(id, updatedClient) {
         const client = await this.clientRepository.findOne({
@@ -64,7 +64,6 @@ let ClientService = class ClientService {
         });
         client.fullname = updatedClient.fullname;
         client.age = updatedClient.age;
-        client.isSubscribe = updatedClient.isSubscribe;
         client.trainers = updatedClient.trainers;
         client.subcribes = updatedClient.subcribes;
         await this.clientRepository.save(client);

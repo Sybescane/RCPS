@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.configOrm = void 0;
-require("dotenv/config");
-exports.configOrm = {
+const typeorm_1 = require("typeorm");
+const ormConfig = new typeorm_1.DataSource({
     type: 'postgres',
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT),
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    entities: ['**/**/*.entity{.js,.ts}'],
+    host: 'localhost',
+    port: 5432,
+    database: 'education',
+    username: 'education',
+    password: 'password',
+    entities: ['dist/**/*.entity{.ts,.js}'],
     logging: true,
     synchronize: false,
     migrationsTableName: 'migrations',
-    migrations: ['dist/src/migrations/*{.ts,.js}']
-};
+    migrations: ['dist/src/migrations/*{.ts,.js}'],
+});
+exports.default = ormConfig;
 //# sourceMappingURL=typeorm.config.js.map

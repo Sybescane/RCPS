@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Subscribe } from "src/subscribe/subscribe.entity";
 import { Trainer } from "src/trainers/trainers.entity";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -9,20 +10,24 @@ export class Client{
    @PrimaryGeneratedColumn()
    id: number;
 
+   @IsNotEmpty()
+   @IsString()
    @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
    @Column({})
    fullname: string;
 
+   @IsNumber()
+   @IsNotEmpty()
    @ApiProperty({example: '23', description: "Возраст"})
    @Column({})
    age: number;
 
-   @ApiProperty({example: true, description: "существование подписки у пользователя"})
-   @Column({})
-   isSubscribe: boolean;
+
+   // @ApiProperty({example: true, description: "существование подписки у пользователя"})
+   // @Column({})
+   // isSubscribe: boolean;
 
    @ManyToMany((type) => Trainer, (trainer) => trainer.clients)
-
    @JoinTable({
       name: 'client_trainer',
       joinColumn: {name :'client_id'},
@@ -31,7 +36,6 @@ export class Client{
    trainers: Trainer[]
 
    @ManyToMany((type) => Subscribe, (subscribe) => subscribe.clients)
-
    @JoinTable({
       name: 'client_subsribe',
       joinColumn: { name: 'client_id'},

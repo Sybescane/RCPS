@@ -14,13 +14,16 @@ const subscribe_module_1 = require("./subscribe/subscribe.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("@nestjs/config");
 const env_config_1 = require("../configurations/env.config");
-const typeorm_config_1 = require("../configurations/typeorm.config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [trainers_module_1.TrainersModule, client_module_1.ClientModule, subscribe_module_1.SubscribesModule,
-            typeorm_1.TypeOrmModule.forRoot(typeorm_config_1.configOrm),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: (config) => config.get('database'),
+                inject: [config_1.ConfigService]
+            }),
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 load: [env_config_1.default]

@@ -18,7 +18,7 @@ export class SubscribesController{
    @ApiOperation({summary: 'Поиск конкретного абонемента'})
    @Get(':id')
    findOne(@Param('id') id: string){
-      this.subscribesService.findOne(+id);
+      return this.subscribesService.findOne(+id);
    }
 
    @ApiOperation({summary: 'Изменение абонемента'})
@@ -29,7 +29,7 @@ export class SubscribesController{
 
    @ApiOperation({summary: 'Создание абонемента'})
    @Post()
-   create(@Body() createSubscribe: CreateSubscribeDto){
+   create(@Body() createSubscribe: CreateSubscribeDto) :Promise<Subscribe>{
       return this.subscribesService.create(createSubscribe);
    }
 

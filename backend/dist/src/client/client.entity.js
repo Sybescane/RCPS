@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 const subscribe_entity_1 = require("../subscribe/subscribe.entity");
 const trainers_entity_1 = require("../trainers/trainers.entity");
 const typeorm_1 = require("typeorm");
@@ -22,20 +23,19 @@ __decorate([
     __metadata("design:type", Number)
 ], Client.prototype, "id", void 0);
 __decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", String)
 ], Client.prototype, "fullname", void 0);
 __decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, swagger_1.ApiProperty)({ example: '23', description: "Возраст" }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", Number)
 ], Client.prototype, "age", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: true, description: "существование подписки у пользователя" }),
-    (0, typeorm_1.Column)({}),
-    __metadata("design:type", Boolean)
-], Client.prototype, "isSubscribe", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)((type) => trainers_entity_1.Trainer, (trainer) => trainer.clients),
     (0, typeorm_1.JoinTable)({

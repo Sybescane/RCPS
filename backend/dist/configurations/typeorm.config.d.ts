@@ -1,3 +1,3 @@
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-import "dotenv/config";
-export declare const configOrm: TypeOrmModuleOptions;
+import { DataSource } from 'typeorm';
+declare const ormConfig: DataSource;
+export default ormConfig;

@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config/dist';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,7 @@ async function bootstrap() {
     .setTitle('Education API')
     .setVersion('1.0')
     .build();
+  app.useGlobalPipes(new ValidationPipe({}));
   const document = SwaggerModule.createDocument(app, config);
   const configService = app.get(ConfigService)
   SwaggerModule.setup('api_docs', app, document);

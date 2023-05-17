@@ -11,7 +11,7 @@ export class ClientsController{
 
    @ApiOperation({summary: 'Поиск всех клиентов'})
    @Get()
-   findAll() {
+   findAll() :Promise<Client[]>{
       return this.clientsService.findAll();
    }
 
@@ -29,7 +29,7 @@ export class ClientsController{
 
    @ApiOperation({summary: 'Создание клиента'})
    @Post()
-   create(@Body() createClient: CreateClientDto){
+   create(@Body() createClient: CreateClientDto) :Promise<Client>{
       return this.clientsService.create(createClient);
    }
 
