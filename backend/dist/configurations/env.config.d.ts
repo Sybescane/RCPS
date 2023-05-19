@@ -4,14 +4,11 @@ declare const _default: () => {
         type: string;
         host: string;
         port: number;
-        database: string;
         username: string;
         password: string;
+        database: string;
+        autoLoadEntities: boolean;
         entities: string[];
-        logging: boolean;
-        synchronize: boolean;
-        migrationsTableName: string;
-        migrations: string[];
     };
 };
 export default _default;

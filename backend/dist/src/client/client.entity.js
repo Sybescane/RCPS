@@ -28,7 +28,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", String)
-], Client.prototype, "fullname", void 0);
+], Client.prototype, "fullName", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
@@ -48,12 +48,12 @@ __decorate([
 __decorate([
     (0, typeorm_1.ManyToMany)((type) => subscribe_entity_1.Subscribe, (subscribe) => subscribe.clients),
     (0, typeorm_1.JoinTable)({
-        name: 'client_subsribe',
+        name: 'client_subscribe',
         joinColumn: { name: 'client_id' },
         inverseJoinColumn: { name: 'subscribe_id' }
     }),
     __metadata("design:type", Array)
-], Client.prototype, "subcribes", void 0);
+], Client.prototype, "subscribes", void 0);
 Client = __decorate([
     (0, typeorm_1.Entity)('clients')
 ], Client);

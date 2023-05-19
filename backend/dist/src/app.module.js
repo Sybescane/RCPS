@@ -8,21 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const trainers_module_1 = require("./trainers/trainers.module");
 const client_module_1 = require("./client/client.module");
-const subscribe_module_1 = require("./subscribe/subscribe.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("@nestjs/config");
 const env_config_1 = require("../configurations/env.config");
+const subscribe_module_1 = require("./subscribe/subscribe.module");
+const trainers_module_1 = require("./trainers/trainers.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [trainers_module_1.TrainersModule, client_module_1.ClientModule, subscribe_module_1.SubscribesModule,
+        imports: [client_module_1.ClientModule, subscribe_module_1.SubscribesModule, trainers_module_1.TrainersModule,
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
+                inject: [config_1.ConfigService],
                 useFactory: (config) => config.get('database'),
-                inject: [config_1.ConfigService]
             }),
             config_1.ConfigModule.forRoot({
                 isGlobal: true,

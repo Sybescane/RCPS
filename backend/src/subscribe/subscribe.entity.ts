@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Client } from "src/client/client.entity";
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
 
-@Entity('subcribe')
+@Entity('subscribe')
 export class Subscribe{
    @PrimaryGeneratedColumn()
    @ApiProperty({example: '1', description: "Уникальный идентификатор"})
@@ -20,11 +20,10 @@ export class Subscribe{
    @Column()
    cost: number;
 
-   @ManyToMany((type) => Client, (client) => client.subcribes)
-
+   @ManyToMany((type) => Client, (client) => client.subscribes)
    @JoinTable({
       name: 'client_subscribe',
-      joinColumn: {name: 'subcribe_id'},
+      joinColumn: {name: 'subscribe_id'},
       inverseJoinColumn: {name: 'client_id'}
    })
    clients: Client[]

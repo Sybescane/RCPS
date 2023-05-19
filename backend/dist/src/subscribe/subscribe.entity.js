@@ -36,16 +36,16 @@ __decorate([
     __metadata("design:type", Number)
 ], Subscribe.prototype, "cost", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)((type) => client_entity_1.Client, (client) => client.subcribes),
+    (0, typeorm_1.ManyToMany)((type) => client_entity_1.Client, (client) => client.subscribes),
     (0, typeorm_1.JoinTable)({
         name: 'client_subscribe',
-        joinColumn: { name: 'subcribe_id' },
+        joinColumn: { name: 'subscribe_id' },
         inverseJoinColumn: { name: 'client_id' }
     }),
     __metadata("design:type", Array)
 ], Subscribe.prototype, "clients", void 0);
 Subscribe = __decorate([
-    (0, typeorm_1.Entity)('subcribe')
+    (0, typeorm_1.Entity)('subscribe')
 ], Subscribe);
 exports.Subscribe = Subscribe;
 //# sourceMappingURL=subscribe.entity.js.map

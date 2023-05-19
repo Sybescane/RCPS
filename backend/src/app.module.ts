@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
-import { TrainersModule } from './trainers/trainers.module';
 import { ClientModule } from './client/client.module';
-import { SubscribesModule } from './subscribe/subscribe.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import configurations from '../configurations/env.config';
+import config from '../configurations/env.config';
+import { SubscribesModule } from './subscribe/subscribe.module';
+import { TrainersModule } from './trainers/trainers.module';
 
 @Module({
-  imports: [TrainersModule, ClientModule, SubscribesModule, 
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (config: ConfigService) => config.get('database'),
-      inject: [ConfigService]
-    }), 
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [configurations]
-    })],
+  imports: [ClientModule, SubscribesModule, TrainersModule,
+  TypeOrmModule.forRootAsync({
+    imports: [ConfigModule],
+    inject: [ConfigService],
+    useFactory: (config: ConfigService) => config.get('database'),
+  }),
+  ConfigModule.forRoot({
+    isGlobal: true,
+    load: [config]
+  })],
   controllers: [],
   providers: [],
 })

@@ -14,7 +14,7 @@ export class Client{
    @IsString()
    @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
    @Column({})
-   fullname: string;
+   fullName: string;
 
    @IsNumber()
    @IsNotEmpty()
@@ -37,10 +37,10 @@ export class Client{
 
    @ManyToMany((type) => Subscribe, (subscribe) => subscribe.clients)
    @JoinTable({
-      name: 'client_subsribe',
+      name: 'client_subscribe',
       joinColumn: { name: 'client_id'},
       inverseJoinColumn: { name: 'subscribe_id'}
    })
-   subcribes: Subscribe[];
+   subscribes: Subscribe[];
 
 }

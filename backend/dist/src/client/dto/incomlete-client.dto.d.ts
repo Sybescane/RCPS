@@ -1,5 +1,5 @@
 export declare class IncompleteClientDto {
     id: number;
-    fullname: string;
+    fullName: string;
     age: number;
 }

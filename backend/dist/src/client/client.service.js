@@ -28,7 +28,7 @@ let ClientService = class ClientService {
     }
     async create(clientDto) {
         const client = this.clientRepository.create();
-        client.fullname = clientDto.fullname;
+        client.fullName = clientDto.fullName;
         client.age = clientDto.age;
         const subscribes = await this.subscribeRepository.findBy({
             id: (0, typeorm_2.In)(clientDto.subscribes)
@@ -36,7 +36,7 @@ let ClientService = class ClientService {
         const trainers = await this.trainerRepository.findBy({
             id: (0, typeorm_2.In)(clientDto.trainers)
         });
-        client.subcribes = subscribes;
+        client.subscribes = subscribes;
         client.trainers = trainers;
         await this.clientRepository.save(client);
         return client;
@@ -46,26 +46,21 @@ let ClientService = class ClientService {
             where: { id },
             relations: {
                 trainers: true,
-                subcribes: true,
+                subscribes: true,
             },
         });
     }
     async findAll() {
-        return await this.clientRepository.find({
-            relations: {
-                subcribes: true,
-                trainers: true,
-            },
-        });
+        return await this.clientRepository.find({});
     }
     async update(id, updatedClient) {
         const client = await this.clientRepository.findOne({
             where: { id }
         });
-        client.fullname = updatedClient.fullname;
+        client.fullName = updatedClient.fullName;
         client.age = updatedClient.age;
         client.trainers = updatedClient.trainers;
-        client.subcribes = updatedClient.subcribes;
+        client.subscribes = updatedClient.subscribes;
         await this.clientRepository.save(client);
         return client;
     }
@@ -77,7 +72,7 @@ let ClientService = class ClientService {
         const incompleteClients = clients.map((client) => {
             const incompleteClient = new incomlete_client_dto_1.IncompleteClientDto();
             incompleteClient.id = client.id;
-            incompleteClient.fullname = client.fullname;
+            incompleteClient.fullName = client.fullName;
             incompleteClient.age = client.age;
             return incompleteClient;
         });

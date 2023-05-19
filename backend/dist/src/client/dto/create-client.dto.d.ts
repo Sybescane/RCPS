@@ -1,5 +1,5 @@
 export declare class CreateClientDto {
-    fullname: string;
+    fullName: string;
     age: number;
     subscribes: number[];
     trainers: number[];

@@ -5,7 +5,7 @@ export class IncompleteClientDto{
    id: number;
    
    @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   fullname: string;
+   fullName: string;
 
    @ApiProperty({example: '23', description: "Возраст"})
    age: number;
