@@ -26,7 +26,7 @@ let TrainersService = class TrainersService {
     }
     async create(trainerDto) {
         const trainer = this.trainerRepository.create();
-        trainer.fullname = trainerDto.fullname;
+        trainer.fullName = trainerDto.fullName;
         trainer.profile = trainerDto.profile;
         trainer.experience = trainerDto.experience;
         const clients = await this.clientRepository.findBy({
@@ -55,7 +55,7 @@ let TrainersService = class TrainersService {
         const trainer = await this.trainerRepository.findOne({
             where: { id },
         });
-        trainer.fullname = updatedTrainer.fullname;
+        trainer.fullName = updatedTrainer.fullName;
         trainer.profile = updatedTrainer.profile;
         trainer.experience = updatedTrainer.experience;
         trainer.clients = updatedTrainer.clients;
@@ -70,7 +70,7 @@ let TrainersService = class TrainersService {
         const incompleteTrainers = trainers.map((trainer) => {
             const incompleteTrainer = new incomplete_trainer_dto_1.IncompleteTrainerDto();
             incompleteTrainer.id = trainer.id;
-            incompleteTrainer.fullname = trainer.fullname;
+            incompleteTrainer.fullName = trainer.fullName;
             incompleteTrainer.profile = trainer.profile;
             return incompleteTrainer;
         });

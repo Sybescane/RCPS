@@ -14,17 +14,12 @@ export class Subscribe{
 
    @ApiProperty({example: 'Абонемент включает в себя...', description: "Описание абонемента"})
    @Column()
-   discription: string;
+   description: string;
 
    @ApiProperty({example: '10000', description: "Стоимость абонемента"})
    @Column()
    cost: number;
 
-   @ManyToMany((type) => Client, (client) => client.subscribes)
-   @JoinTable({
-      name: 'client_subscribe',
-      joinColumn: {name: 'subscribe_id'},
-      inverseJoinColumn: {name: 'client_id'}
-   })
+   @ManyToMany(() => Client, (client) => client.subscribes)
    clients: Client[]
 }

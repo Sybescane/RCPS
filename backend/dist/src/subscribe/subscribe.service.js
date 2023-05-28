@@ -26,12 +26,13 @@ let SubscribesService = class SubscribesService {
     async create(subscribeDto) {
         const subscribe = this.subscribeRepository.create();
         subscribe.name = subscribeDto.name;
-        subscribe.discription = subscribeDto.discription;
-        subscribe.cost = subscribe.cost;
+        subscribe.description = subscribeDto.description;
+        subscribe.cost = subscribeDto.cost;
         const clients = await this.clientRepository.findBy({
             id: (0, typeorm_2.In)(subscribeDto.clients)
         });
         subscribe.clients = clients;
+        await this.subscribeRepository.save(subscribe);
         return subscribe;
     }
     findOne(id) {
@@ -40,7 +41,11 @@ let SubscribesService = class SubscribesService {
         });
     }
     async findAll() {
-        return await this.subscribeRepository.find();
+        return await this.subscribeRepository.find({
+            relations: {
+                clients: true
+            }
+        });
     }
     async update(id, updatedSubscribe) {
         const subcribe = await this.subscribeRepository.findOne({
@@ -48,7 +53,7 @@ let SubscribesService = class SubscribesService {
         });
         subcribe.name = updatedSubscribe.name;
         subcribe.cost = updatedSubscribe.cost;
-        subcribe.discription = updatedSubscribe.discription;
+        subcribe.description = updatedSubscribe.description;
         subcribe.clients = updatedSubscribe.clients;
         await this.subscribeRepository.save(subcribe);
         return subcribe;

@@ -5,7 +5,7 @@ import { In, Repository } from "typeorm";
 import { Trainer } from "src/trainers/trainers.entity";
 import { Subscribe } from "src/subscribe/subscribe.entity";
 import { CreateClientDto } from "./dto/create-client.dto";
-import { IncompleteClientDto } from './dto/incomlete-client.dto';
+import { IncompleteClientDto } from './dto/incomplete-client.dto';
 
 @Injectable()
 export class ClientService{
@@ -34,8 +34,8 @@ export class ClientService{
       return client
    }
 
-   findOne(id: number): Promise<Client> {
-      return this.clientRepository.findOne({
+   async findOne(id: number): Promise<Client> {
+      return await this.clientRepository.findOne({
          where: {id},
          relations: {
             trainers: true, 
@@ -46,10 +46,10 @@ export class ClientService{
 
    async findAll(): Promise<Client[]> {
        return await this.clientRepository.find({
-         // relations:{
-         //    subcribes: true,
-         //    trainers: true,
-         // },
+         relations:{
+            subscribes: true,
+            trainers: true,
+         },
       })
    }
 

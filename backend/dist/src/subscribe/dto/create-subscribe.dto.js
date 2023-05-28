@@ -20,7 +20,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Абонемент включает в себя...', description: "Описание абонемента" }),
     __metadata("design:type", String)
-], CreateSubscribeDto.prototype, "discription", void 0);
+], CreateSubscribeDto.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: '10000', description: "Стоимость абонемента" }),
     __metadata("design:type", Number)

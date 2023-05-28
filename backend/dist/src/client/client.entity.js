@@ -23,8 +23,9 @@ __decorate([
     __metadata("design:type", Number)
 ], Client.prototype, "id", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Имя не должно быть пустым' }),
+    (0, class_validator_1.IsString)({ message: 'Имя должно быть строкой' }),
+    (0, class_validator_1.MinLength)(5, { message: 'Минимальная длина имени - 5' }),
     (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", String)
@@ -37,7 +38,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Client.prototype, "age", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)((type) => trainers_entity_1.Trainer, (trainer) => trainer.clients),
+    (0, typeorm_1.ManyToMany)(() => trainers_entity_1.Trainer, (trainer) => trainer.clients),
     (0, typeorm_1.JoinTable)({
         name: 'client_trainer',
         joinColumn: { name: 'client_id' },
@@ -46,7 +47,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Client.prototype, "trainers", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)((type) => subscribe_entity_1.Subscribe, (subscribe) => subscribe.clients),
+    (0, typeorm_1.ManyToMany)(() => subscribe_entity_1.Subscribe, (subscribe) => subscribe.clients),
     (0, typeorm_1.JoinTable)({
         name: 'client_subscribe',
         joinColumn: { name: 'client_id' },

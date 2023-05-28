@@ -5,7 +5,7 @@ export class IncompleteTrainerDto{
    id: number;
 
    @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   fullname: string;
+   fullName: string;
 
    @ApiProperty({example: 'Бодибилдинг', description: "Специализация"})
    profile: string;

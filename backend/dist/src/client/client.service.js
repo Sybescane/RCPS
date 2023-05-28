@@ -19,7 +19,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const trainers_entity_1 = require("../trainers/trainers.entity");
 const subscribe_entity_1 = require("../subscribe/subscribe.entity");
-const incomlete_client_dto_1 = require("./dto/incomlete-client.dto");
+const incomplete_client_dto_1 = require("./dto/incomplete-client.dto");
 let ClientService = class ClientService {
     constructor(clientRepository, trainerRepository, subscribeRepository) {
         this.clientRepository = clientRepository;
@@ -41,8 +41,8 @@ let ClientService = class ClientService {
         await this.clientRepository.save(client);
         return client;
     }
-    findOne(id) {
-        return this.clientRepository.findOne({
+    async findOne(id) {
+        return await this.clientRepository.findOne({
             where: { id },
             relations: {
                 trainers: true,
@@ -51,7 +51,12 @@ let ClientService = class ClientService {
         });
     }
     async findAll() {
-        return await this.clientRepository.find({});
+        return await this.clientRepository.find({
+            relations: {
+                subscribes: true,
+                trainers: true,
+            },
+        });
     }
     async update(id, updatedClient) {
         const client = await this.clientRepository.findOne({
@@ -70,7 +75,7 @@ let ClientService = class ClientService {
     async findIncomplete() {
         const clients = await this.clientRepository.find();
         const incompleteClients = clients.map((client) => {
-            const incompleteClient = new incomlete_client_dto_1.IncompleteClientDto();
+            const incompleteClient = new incomplete_client_dto_1.IncompleteClientDto();
             incompleteClient.id = client.id;
             incompleteClient.fullName = client.fullName;
             incompleteClient.age = client.age;

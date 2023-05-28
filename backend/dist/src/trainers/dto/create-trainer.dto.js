@@ -16,7 +16,7 @@ class CreateTrainerDto {
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     __metadata("design:type", String)
-], CreateTrainerDto.prototype, "fullname", void 0);
+], CreateTrainerDto.prototype, "fullName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Бодибилдинг', description: "Специализация" }),
     __metadata("design:type", String)

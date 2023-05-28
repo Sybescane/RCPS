@@ -25,8 +25,11 @@ let ClientsController = class ClientsController {
     findAll() {
         return this.clientsService.findAll();
     }
+    findIncomplete() {
+        return this.clientsService.findIncomplete();
+    }
     findOne(id) {
-        this.clientsService.findOne(+id);
+        return this.clientsService.findOne(+id);
     }
     update(id, updateClient) {
         return this.clientsService.update(+id, updateClient);
@@ -46,12 +49,19 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ClientsController.prototype, "findAll", null);
 __decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Поиск для неавторизованных клиентов' }),
+    (0, common_1.Get)('incomplete'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ClientsController.prototype, "findIncomplete", null);
+__decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Поиск конкретного клиента' }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ClientsController.prototype, "findOne", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Изменение клиента' }),

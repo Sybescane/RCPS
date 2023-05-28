@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Init1684436954518 implements MigrationInterface {
-    name = 'Init1684436954518'
+export class Init1685186651523 implements MigrationInterface {
+    name = 'Init1685186651523'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "subscribe" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "discription" character varying NOT NULL, "cost" integer NOT NULL, CONSTRAINT "PK_3e91e772184cd3feb30688ef1b8" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "trainers" ("id" SERIAL NOT NULL, "fullname" character varying NOT NULL, "profile" character varying NOT NULL, "experience" integer NOT NULL, CONSTRAINT "PK_198da56395c269936d351ab774b" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "subscribe" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "description" character varying NOT NULL, "cost" integer NOT NULL, CONSTRAINT "PK_3e91e772184cd3feb30688ef1b8" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "trainers" ("id" SERIAL NOT NULL, "fullName" character varying NOT NULL, "profile" character varying NOT NULL, "experience" integer NOT NULL, CONSTRAINT "PK_198da56395c269936d351ab774b" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "clients" ("id" SERIAL NOT NULL, "fullName" character varying NOT NULL, "age" integer NOT NULL, CONSTRAINT "PK_f1ab7cf3a5714dbc6bb4e1c28a4" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "client_subscribe" ("subscribe_id" integer NOT NULL, "client_id" integer NOT NULL, CONSTRAINT "PK_80809b5aed343519fc2784a3a25" PRIMARY KEY ("subscribe_id", "client_id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_80bc9b610e86391b9b7a4ec826" ON "client_subscribe" ("subscribe_id") `);

@@ -10,7 +10,7 @@ export class Trainer{
 
    @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
    @Column()
-   fullname: string;
+   fullName: string;
 
    @ApiProperty({example: 'Бодибилдинг', description: "Специализация"})
    @Column()
@@ -20,12 +20,6 @@ export class Trainer{
    @Column()
    experience: number;
 
-   @ManyToMany((type) => Client, (client) => client.trainers)
-
-   @JoinTable({
-      name: 'client_trainer',
-      joinColumn: { name: 'trainer_id'},
-      inverseJoinColumn: { name: 'client_id'}
-   })
+   @ManyToMany(() => Client, (client) => client.trainers)
    clients: Client[];   
 }

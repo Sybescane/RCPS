@@ -29,19 +29,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Абонемент включает в себя...', description: "Описание абонемента" }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Subscribe.prototype, "discription", void 0);
+], Subscribe.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: '10000', description: "Стоимость абонемента" }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Subscribe.prototype, "cost", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)((type) => client_entity_1.Client, (client) => client.subscribes),
-    (0, typeorm_1.JoinTable)({
-        name: 'client_subscribe',
-        joinColumn: { name: 'subscribe_id' },
-        inverseJoinColumn: { name: 'client_id' }
-    }),
+    (0, typeorm_1.ManyToMany)(() => client_entity_1.Client, (client) => client.subscribes),
     __metadata("design:type", Array)
 ], Subscribe.prototype, "clients", void 0);
 Subscribe = __decorate([

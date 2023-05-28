@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 import { Trainer } from "src/trainers/trainers.entity";
 import { Subscribe } from "src/subscribe/subscribe.entity";
 import { CreateClientDto } from "./dto/create-client.dto";
-import { IncompleteClientDto } from './dto/incomlete-client.dto';
+import { IncompleteClientDto } from './dto/incomplete-client.dto';
 export declare class ClientService {
     private readonly clientRepository;
     private readonly trainerRepository;

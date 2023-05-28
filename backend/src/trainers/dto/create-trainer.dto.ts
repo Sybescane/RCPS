@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateTrainerDto{
    @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   fullname: string;
+   fullName: string;
 
    @ApiProperty({example: 'Бодибилдинг', description: "Специализация"})
    profile: string;

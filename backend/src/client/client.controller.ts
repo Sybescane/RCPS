@@ -1,8 +1,9 @@
 import { ClientService } from './client.service';
 import { Client } from "./client.entity";
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiMovedPermanentlyResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateClientDto } from './dto/create-client.dto';
+import { IncompleteClientDto } from './dto/incomplete-client.dto';
 
 @Controller('clients')
 @ApiTags('Клиенты')
@@ -15,10 +16,16 @@ export class ClientsController{
       return this.clientsService.findAll();
    }
 
+   @ApiOperation({summary: 'Поиск для неавторизованных клиентов'})
+   @Get('incomplete')
+   findIncomplete() :Promise<IncompleteClientDto[]>{
+      return this.clientsService.findIncomplete();
+   }
+
    @ApiOperation({summary: 'Поиск конкретного клиента'})
    @Get(':id')
-   findOne(@Param('id') id: string){
-      this.clientsService.findOne(+id);
+   findOne(@Param('id') id: string): Promise<Client>{
+      return this.clientsService.findOne(+id);
    }
 
    @ApiOperation({summary: 'Изменение клиента'})

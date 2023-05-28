@@ -1,5 +1,5 @@
 export declare class IncompleteTrainerDto {
     id: number;
-    fullname: string;
+    fullName: string;
     profile: string;
 }

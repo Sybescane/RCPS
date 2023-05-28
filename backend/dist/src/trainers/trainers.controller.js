@@ -25,8 +25,11 @@ let TrainersController = class TrainersController {
     findAll() {
         return this.trainersService.findAll();
     }
+    findIncomplete() {
+        return this.trainersService.findIncomplete();
+    }
     findOne(id) {
-        this.trainersService.findOne(+id);
+        return this.trainersService.findOne(+id);
     }
     update(id, updateTrainer) {
         return this.trainersService.update(+id, updateTrainer);
@@ -45,6 +48,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], TrainersController.prototype, "findAll", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Поиск неавторизованных тренеров' }),
+    (0, common_1.Get)('incomplete'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], TrainersController.prototype, "findIncomplete", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Поиск конкретного тренера' }),
     (0, common_1.Get)(':id'),

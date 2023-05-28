@@ -5,7 +5,7 @@ export class CreateSubscribeDto{
    name: string;
 
    @ApiProperty({example: 'Абонемент включает в себя...', description: "Описание абонемента"})
-   discription: string;
+   description: string;
 
    @ApiProperty({example: '10000', description: "Стоимость абонемента"})
    cost: number;

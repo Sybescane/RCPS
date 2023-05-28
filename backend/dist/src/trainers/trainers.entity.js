@@ -24,7 +24,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Trainer.prototype, "fullname", void 0);
+], Trainer.prototype, "fullName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Бодибилдинг', description: "Специализация" }),
     (0, typeorm_1.Column)(),
@@ -36,12 +36,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Trainer.prototype, "experience", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)((type) => client_entity_1.Client, (client) => client.trainers),
-    (0, typeorm_1.JoinTable)({
-        name: 'client_trainer',
-        joinColumn: { name: 'trainer_id' },
-        inverseJoinColumn: { name: 'client_id' }
-    }),
+    (0, typeorm_1.ManyToMany)(() => client_entity_1.Client, (client) => client.trainers),
     __metadata("design:type", Array)
 ], Trainer.prototype, "clients", void 0);
 Trainer = __decorate([

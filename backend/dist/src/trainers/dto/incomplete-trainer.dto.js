@@ -20,7 +20,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     __metadata("design:type", String)
-], IncompleteTrainerDto.prototype, "fullname", void 0);
+], IncompleteTrainerDto.prototype, "fullName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Бодибилдинг', description: "Специализация" }),
     __metadata("design:type", String)

@@ -12,15 +12,17 @@ export class SubscribesService{
       @InjectRepository(Client)
       private readonly clientRepository: Repository<Client>
    ){}
+
    async create(subscribeDto: CreateSubscribeDto): Promise<Subscribe> {
       const subscribe = this.subscribeRepository.create()
       subscribe.name = subscribeDto.name;
-      subscribe.discription = subscribeDto.discription;
-      subscribe.cost = subscribe.cost;
+      subscribe.description = subscribeDto.description;
+      subscribe.cost = subscribeDto.cost;
       const clients = await this.clientRepository.findBy({
          id: In(subscribeDto.clients)
       });
       subscribe.clients = clients;
+      await this.subscribeRepository.save(subscribe);
       return subscribe;
    }
    findOne(id: number){
@@ -29,7 +31,11 @@ export class SubscribesService{
       })
    }
    async findAll(): Promise<Subscribe[]> {
-      return await this.subscribeRepository.find();
+      return await this.subscribeRepository.find({
+         relations: {
+            clients: true
+         }
+      });
    }
    async update(id: number, updatedSubscribe: Subscribe): Promise<Subscribe> {
       const subcribe = await this.subscribeRepository.findOne({
@@ -37,7 +43,7 @@ export class SubscribesService{
       });
       subcribe.name = updatedSubscribe.name;
       subcribe.cost = updatedSubscribe.cost;
-      subcribe.discription = updatedSubscribe.discription;
+      subcribe.description = updatedSubscribe.description;
       subcribe.clients = updatedSubscribe.clients;
       await this.subscribeRepository.save(subcribe);
       return subcribe;

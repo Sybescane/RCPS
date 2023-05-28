@@ -11,14 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateClientDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 class CreateClientDto {
 }
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: 'ФИО' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Имя не должно быть пустым' }),
+    (0, class_validator_1.IsString)({ message: 'Имя должно быть строкой' }),
+    (0, class_validator_1.MinLength)(5, { message: 'Минимальная длина имени - 5' }),
+    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
     __metadata("design:type", String)
 ], CreateClientDto.prototype, "fullName", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '23', description: 'Возраст' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiProperty)({ example: '23', description: "Возраст" }),
     __metadata("design:type", Number)
 ], CreateClientDto.prototype, "age", void 0);
 __decorate([

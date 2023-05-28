@@ -5,7 +5,8 @@ export declare class TrainersController {
     private readonly trainersService;
     constructor(trainersService: TrainersService);
     findAll(): Promise<Trainer[]>;
-    findOne(id: string): void;
+    findIncomplete(): Promise<import("./dto/incomplete-trainer.dto").IncompleteTrainerDto[]>;
+    findOne(id: string): Promise<Trainer>;
     update(id: string, updateTrainer: Trainer): Promise<Trainer>;
     create(createTrainer: CreateTrainerDto): Promise<Trainer>;
     remove(id: string): void;

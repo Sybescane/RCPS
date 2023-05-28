@@ -15,10 +15,16 @@ export class TrainersController{
       return this.trainersService.findAll();
    }
 
+   @ApiOperation({summary: 'Поиск неавторизованных тренеров'})
+   @Get('incomplete')
+   findIncomplete(){
+      return this.trainersService.findIncomplete();
+   }
+
    @ApiOperation({summary: 'Поиск конкретного тренера'})
    @Get(':id')
    findOne(@Param('id') id: string){
-      this.trainersService.findOne(+id);
+      return this.trainersService.findOne(+id);
    }
 
    @ApiOperation({summary: 'Изменение тренера'})

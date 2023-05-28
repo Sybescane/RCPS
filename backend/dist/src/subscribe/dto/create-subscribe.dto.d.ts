@@ -1,6 +1,6 @@
 export declare class CreateSubscribeDto {
     name: string;
-    discription: string;
+    description: string;
     cost: number;
     clients: number[];
 }

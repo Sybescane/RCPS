@@ -1,5 +1,5 @@
 export declare class CreateTrainerDto {
-    fullname: string;
+    fullName: string;
     profile: string;
     experience: number;
     clients: number[];
