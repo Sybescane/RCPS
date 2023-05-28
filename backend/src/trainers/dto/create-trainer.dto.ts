@@ -1,15 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, PickType } from "@nestjs/swagger";
+import { Trainer } from "../trainers.entity";
 
-export class CreateTrainerDto{
-   @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   fullName: string;
+export class CreateTrainerDto extends PickType(Trainer, ['fullName', 'profile', 'experience'] as const) {
 
-   @ApiProperty({example: 'Бодибилдинг', description: "Специализация"})
-   profile: string;
-
-   @ApiProperty({example: '4', description: "Стаж работы"})
-   experience: number;
-
-   @ApiProperty({examples: [1,2], description: 'Список идентификаторов клиентов'}) 
-   clients: number[];
+   @ApiProperty({example: [], description: 'Список идентификаторов клиентов', type: [String]}) 
+   clients: string[];
 }

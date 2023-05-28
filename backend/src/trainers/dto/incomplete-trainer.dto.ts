@@ -1,12 +1,4 @@
-import { ApiProduces, ApiProperty } from "@nestjs/swagger";
+import { ApiProduces, ApiProperty, PickType } from "@nestjs/swagger";
+import { Trainer } from "../trainers.entity";
 
-export class IncompleteTrainerDto{
-   @ApiProperty({example: '1', description: "Уникальный идентификатор"})
-   id: number;
-
-   @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   fullName: string;
-
-   @ApiProperty({example: 'Бодибилдинг', description: "Специализация"})
-   profile: string;
-}
+export class IncompleteTrainerDto extends PickType(Trainer, ['fullName', 'profile'] as const) {}

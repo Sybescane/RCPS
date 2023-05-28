@@ -19,7 +19,7 @@ export class SubscribesService{
       subscribe.description = subscribeDto.description;
       subscribe.cost = subscribeDto.cost;
       const clients = await this.clientRepository.findBy({
-         id: In(subscribeDto.clients)
+         email: In(subscribeDto.clients)
       });
       subscribe.clients = clients;
       await this.subscribeRepository.save(subscribe);

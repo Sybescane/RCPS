@@ -10,9 +10,9 @@ export declare class ClientService {
     private readonly subscribeRepository;
     constructor(clientRepository: Repository<Client>, trainerRepository: Repository<Trainer>, subscribeRepository: Repository<Subscribe>);
     create(clientDto: CreateClientDto): Promise<Client>;
-    findOne(id: number): Promise<Client>;
+    findOne(email: string): Promise<Client>;
     findAll(): Promise<Client[]>;
-    update(id: number, updatedClient: Client): Promise<Client>;
-    remove(id: number): void;
+    update(email: string, updatedClient: Client): Promise<Client>;
+    remove(email: string): void;
     findIncomplete(): Promise<IncompleteClientDto[]>;
 }

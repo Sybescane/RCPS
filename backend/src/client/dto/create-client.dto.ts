@@ -1,23 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString, MinLength } from "class-validator";
+import { ApiProperty, PartialType, PickType } from "@nestjs/swagger";
+import { IsInt, IsNotEmpty, IsString, Max, Min, MinLength } from "class-validator";
+import { Client } from "../client.entity";
 
-export class CreateClientDto{
+export class CreateClientDto extends PickType(Client, ['email', 'password','fullName', 'age'] as const){
 
-   @IsNotEmpty({message: 'Имя не должно быть пустым'})
-   @IsString({message: 'Имя должно быть строкой'})
-   @MinLength(5, {message: 'Минимальная длина имени - 5'})
-   @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   fullName: string;
-
-   @IsNumber()
-   @IsNotEmpty()
-   @ApiProperty({example: '23', description: "Возраст"})
-   age: number;
-
-
-   @ApiProperty({examples: [1,2], description: 'Список идентификаторов подписок'})
+   @ApiProperty({example: [], type: [Number],description: 'Список идентификаторов подписок'})
    subscribes: number[];
 
-   @ApiProperty({examples: [1,2], description: 'Список идентификаторов тренеров'}) 
+   @ApiProperty({example: [], type: [Number],description: 'Список идентификаторов тренеров'}) 
    trainers: number[];  
+   
 }

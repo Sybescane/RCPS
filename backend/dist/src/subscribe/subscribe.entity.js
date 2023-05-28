@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Subscribe = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 const client_entity_1 = require("../client/client.entity");
 const typeorm_1 = require("typeorm");
 let Subscribe = class Subscribe {
@@ -21,16 +22,23 @@ __decorate([
     __metadata("design:type", Number)
 ], Subscribe.prototype, "id", void 0);
 __decorate([
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле name' }),
+    (0, class_validator_1.IsString)({ message: 'Name должно быть строкой' }),
     (0, swagger_1.ApiProperty)({ example: 'Тренажерный зал', description: 'Название абонемента' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Subscribe.prototype, "name", void 0);
 __decorate([
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле description' }),
+    (0, class_validator_1.IsString)({ message: 'Description должно быть строкой' }),
     (0, swagger_1.ApiProperty)({ example: 'Абонемент включает в себя...', description: "Описание абонемента" }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Subscribe.prototype, "description", void 0);
 __decorate([
+    (0, class_validator_1.IsInt)({ message: 'Поле experience должно быть числом' }),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле cost' }),
     (0, swagger_1.ApiProperty)({ example: '10000', description: "Стоимость абонемента" }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)

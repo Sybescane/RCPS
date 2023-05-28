@@ -29,7 +29,7 @@ let SubscribesService = class SubscribesService {
         subscribe.description = subscribeDto.description;
         subscribe.cost = subscribeDto.cost;
         const clients = await this.clientRepository.findBy({
-            id: (0, typeorm_2.In)(subscribeDto.clients)
+            email: (0, typeorm_2.In)(subscribeDto.clients)
         });
         subscribe.clients = clients;
         await this.subscribeRepository.save(subscribe);

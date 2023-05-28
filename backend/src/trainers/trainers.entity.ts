@@ -1,22 +1,30 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsInt, IsNotEmpty, IsString, Min, MinLength } from "class-validator";
 import { Client } from "src/client/client.entity";
 import { PrimaryGeneratedColumn, Entity, Column, ManyToMany,JoinTable } from "typeorm";
 
 @Entity('trainers')
 export class Trainer{
    @PrimaryGeneratedColumn()
-   @ApiProperty({example: '1', description: "Уникальный идентификатор"})
    id: number;
 
-   @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО"})
-   @Column()
+   @IsNotEmpty({message: 'Заполните поле fullName'})
+   @IsString({message: 'Имя должно быть строкой'})
+   @MinLength(5, {message: 'Минимальная длина имени - 5'})
+   @ApiProperty({example: 'Иванов Иван Иванович', description: "ФИО", type: String, minLength: 5})
+   @Column({})
    fullName: string;
 
-   @ApiProperty({example: 'Бодибилдинг', description: "Специализация"})
+
+   @IsNotEmpty({message: 'Заполните поле profile'})
+   @ApiProperty({example: 'Бодибилдинг', description: 'Специализация', type: String})
    @Column()
    profile: string;
 
-   @ApiProperty({example: '4', description: "Стаж работы"})
+   @IsNotEmpty({message: 'Заполните поле experience'})
+   @IsInt({message: 'Поле experience должно быть числом'})
+   @Min(0)
+   @ApiProperty({example: '4', description: "Стаж работы", type: Number, minimum: 0})
    @Column()
    experience: number;
 

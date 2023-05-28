@@ -28,17 +28,17 @@ let ClientsController = class ClientsController {
     findIncomplete() {
         return this.clientsService.findIncomplete();
     }
-    findOne(id) {
-        return this.clientsService.findOne(+id);
+    findOne(email) {
+        return this.clientsService.findOne(email);
     }
-    update(id, updateClient) {
-        return this.clientsService.update(+id, updateClient);
+    update(email, updateClient) {
+        return this.clientsService.update(email, updateClient);
     }
     create(createClient) {
         return this.clientsService.create(createClient);
     }
-    remove(id) {
-        return this.clientsService.remove(+id);
+    remove(email) {
+        return this.clientsService.remove(email);
     }
 };
 __decorate([
@@ -57,16 +57,16 @@ __decorate([
 ], ClientsController.prototype, "findIncomplete", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Поиск конкретного клиента' }),
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(':email'),
+    __param(0, (0, common_1.Param)('email')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ClientsController.prototype, "findOne", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Изменение клиента' }),
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Put)(':email'),
+    __param(0, (0, common_1.Param)('email')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, client_entity_1.Client]),
@@ -82,8 +82,8 @@ __decorate([
 ], ClientsController.prototype, "create", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Удаление клиента' }),
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(':email'),
+    __param(0, (0, common_1.Param)('email')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

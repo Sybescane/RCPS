@@ -11,27 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Trainer = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 const client_entity_1 = require("../client/client.entity");
 const typeorm_1 = require("typeorm");
 let Trainer = class Trainer {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
-    (0, swagger_1.ApiProperty)({ example: '1', description: "Уникальный идентификатор" }),
     __metadata("design:type", Number)
 ], Trainer.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
-    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле fullName' }),
+    (0, class_validator_1.IsString)({ message: 'Имя должно быть строкой' }),
+    (0, class_validator_1.MinLength)(5, { message: 'Минимальная длина имени - 5' }),
+    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО", type: String, minLength: 5 }),
+    (0, typeorm_1.Column)({}),
     __metadata("design:type", String)
 ], Trainer.prototype, "fullName", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Бодибилдинг', description: "Специализация" }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле profile' }),
+    (0, swagger_1.ApiProperty)({ example: 'Бодибилдинг', description: 'Специализация', type: String }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Trainer.prototype, "profile", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '4', description: "Стаж работы" }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле experience' }),
+    (0, class_validator_1.IsInt)({ message: 'Поле experience должно быть числом' }),
+    (0, class_validator_1.Min)(0),
+    (0, swagger_1.ApiProperty)({ example: '4', description: "Стаж работы", type: Number, minimum: 0 }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Trainer.prototype, "experience", void 0);

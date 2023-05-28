@@ -18,25 +18,48 @@ const typeorm_1 = require("typeorm");
 let Client = class Client {
 };
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '1', description: 'Уникальный идентификатор' }),
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Client.prototype, "id", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)({ message: 'Имя не должно быть пустым' }),
+    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле email' }),
+    (0, swagger_1.ApiProperty)({ example: 'mail@mail.ru', description: 'Email' }),
+    (0, typeorm_1.Column)({}),
+    __metadata("design:type", String)
+], Client.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле password' }),
+    (0, class_validator_1.MinLength)(8),
+    (0, swagger_1.ApiProperty)({ example: 'qwerty12345678', description: 'Password', type: String, minLength: 8 }),
+    (0, typeorm_1.Column)({}),
+    __metadata("design:type", String)
+], Client.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле fullName' }),
     (0, class_validator_1.IsString)({ message: 'Имя должно быть строкой' }),
     (0, class_validator_1.MinLength)(5, { message: 'Минимальная длина имени - 5' }),
-    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
+    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО", type: String, minLength: 5 }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", String)
 ], Client.prototype, "fullName", void 0);
 __decorate([
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, swagger_1.ApiProperty)({ example: '23', description: "Возраст" }),
+    (0, class_validator_1.IsInt)({ message: 'Поле age должно быть числом' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле age' }),
+    (0, class_validator_1.Min)(12, { message: 'Минимальный возраст - 12' }),
+    (0, class_validator_1.Max)(100, { message: 'Максимальный возраст - 100' }),
+    (0, swagger_1.ApiProperty)({ example: '23', description: "Возраст", minimum: 12, maximum: 100, type: Number }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", Number)
 ], Client.prototype, "age", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], Client.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], Client.prototype, "updatedAt", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => trainers_entity_1.Trainer, (trainer) => trainer.clients),
     (0, typeorm_1.JoinTable)({
@@ -56,7 +79,8 @@ __decorate([
     __metadata("design:type", Array)
 ], Client.prototype, "subscribes", void 0);
 Client = __decorate([
-    (0, typeorm_1.Entity)('clients')
+    (0, typeorm_1.Entity)('clients'),
+    (0, typeorm_1.Unique)(['email'])
 ], Client);
 exports.Client = Client;
 //# sourceMappingURL=client.entity.js.map

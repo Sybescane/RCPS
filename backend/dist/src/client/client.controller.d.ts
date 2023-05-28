@@ -7,8 +7,8 @@ export declare class ClientsController {
     constructor(clientsService: ClientService);
     findAll(): Promise<Client[]>;
     findIncomplete(): Promise<IncompleteClientDto[]>;
-    findOne(id: string): Promise<Client>;
-    update(id: string, updateClient: Client): Promise<Client>;
+    findOne(email: string): Promise<Client>;
+    update(email: string, updateClient: Client): Promise<Client>;
     create(createClient: CreateClientDto): Promise<Client>;
-    remove(id: string): void;
+    remove(email: string): void;
 }

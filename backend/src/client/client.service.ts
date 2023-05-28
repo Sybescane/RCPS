@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Client } from './client.entity';
 import { InjectRepository } from "@nestjs/typeorm";
 import { In, Repository } from "typeorm";
@@ -20,6 +20,8 @@ export class ClientService{
    
    async create(clientDto: CreateClientDto): Promise<Client> {
       const client = this.clientRepository.create();
+      client.email = clientDto.email;
+      client.password = clientDto.password;
       client.fullName = clientDto.fullName;
       client.age = clientDto.age;
       const subscribes = await this.subscribeRepository.findBy({
@@ -34,9 +36,9 @@ export class ClientService{
       return client
    }
 
-   async findOne(id: number): Promise<Client> {
+   async findOne(email: string): Promise<Client> {
       return await this.clientRepository.findOne({
-         where: {id},
+         where: {email},
          relations: {
             trainers: true, 
             subscribes: true,
@@ -53,10 +55,12 @@ export class ClientService{
       })
    }
 
-   async update(id: number, updatedClient: Client): Promise<Client> {
+   async update(email: string, updatedClient: Client): Promise<Client> {
       const client = await this.clientRepository.findOne({
-         where: {id}
+         where: {email}
       });
+      client.email = updatedClient.email;
+      client.password = updatedClient.password; 
       client.fullName = updatedClient.fullName;
       client.age = updatedClient.age;
       client.trainers = updatedClient.trainers;
@@ -65,15 +69,14 @@ export class ClientService{
       return client;
    }
 
-   remove(id: number){
-      this.clientRepository.delete({id});
+   remove(email: string){
+      this.clientRepository.delete({email});
    }
 
    async findIncomplete(): Promise<IncompleteClientDto[]>{
       const clients = await this.clientRepository.find();
       const incompleteClients: IncompleteClientDto[] = clients.map((client) => {
          const incompleteClient = new IncompleteClientDto();
-         incompleteClient.id = client.id;
          incompleteClient.fullName = client.fullName;
          incompleteClient.age = client.age;
          return incompleteClient;

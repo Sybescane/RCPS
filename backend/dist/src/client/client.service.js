@@ -28,6 +28,8 @@ let ClientService = class ClientService {
     }
     async create(clientDto) {
         const client = this.clientRepository.create();
+        client.email = clientDto.email;
+        client.password = clientDto.password;
         client.fullName = clientDto.fullName;
         client.age = clientDto.age;
         const subscribes = await this.subscribeRepository.findBy({
@@ -41,9 +43,9 @@ let ClientService = class ClientService {
         await this.clientRepository.save(client);
         return client;
     }
-    async findOne(id) {
+    async findOne(email) {
         return await this.clientRepository.findOne({
-            where: { id },
+            where: { email },
             relations: {
                 trainers: true,
                 subscribes: true,
@@ -58,10 +60,12 @@ let ClientService = class ClientService {
             },
         });
     }
-    async update(id, updatedClient) {
+    async update(email, updatedClient) {
         const client = await this.clientRepository.findOne({
-            where: { id }
+            where: { email }
         });
+        client.email = updatedClient.email;
+        client.password = updatedClient.password;
         client.fullName = updatedClient.fullName;
         client.age = updatedClient.age;
         client.trainers = updatedClient.trainers;
@@ -69,14 +73,13 @@ let ClientService = class ClientService {
         await this.clientRepository.save(client);
         return client;
     }
-    remove(id) {
-        this.clientRepository.delete({ id });
+    remove(email) {
+        this.clientRepository.delete({ email });
     }
     async findIncomplete() {
         const clients = await this.clientRepository.find();
         const incompleteClients = clients.map((client) => {
             const incompleteClient = new incomplete_client_dto_1.IncompleteClientDto();
-            incompleteClient.id = client.id;
             incompleteClient.fullName = client.fullName;
             incompleteClient.age = client.age;
             return incompleteClient;

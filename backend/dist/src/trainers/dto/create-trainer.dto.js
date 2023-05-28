@@ -11,22 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTrainerDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
-class CreateTrainerDto {
+const trainers_entity_1 = require("../trainers.entity");
+class CreateTrainerDto extends (0, swagger_1.PickType)(trainers_entity_1.Trainer, ['fullName', 'profile', 'experience']) {
 }
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Иванов Иван Иванович', description: "ФИО" }),
-    __metadata("design:type", String)
-], CreateTrainerDto.prototype, "fullName", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Бодибилдинг', description: "Специализация" }),
-    __metadata("design:type", String)
-], CreateTrainerDto.prototype, "profile", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: '4', description: "Стаж работы" }),
-    __metadata("design:type", Number)
-], CreateTrainerDto.prototype, "experience", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ examples: [1, 2], description: 'Список идентификаторов клиентов' }),
+    (0, swagger_1.ApiProperty)({ example: [], description: 'Список идентификаторов клиентов', type: [String] }),
     __metadata("design:type", Array)
 ], CreateTrainerDto.prototype, "clients", void 0);
 exports.CreateTrainerDto = CreateTrainerDto;

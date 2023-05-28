@@ -20,7 +20,7 @@ export class TrainersService{
       trainer.profile = trainerDto.profile;
       trainer.experience = trainerDto.experience;
       const clients = await this.clientRepository.findBy({
-         id: In(trainerDto.clients)
+         email: In(trainerDto.clients)
       })
       trainer.clients = clients;
       await this.trainerRepository.save(trainer);
@@ -59,7 +59,6 @@ export class TrainersService{
       const trainers = await this.trainerRepository.find();
       const incompleteTrainers: IncompleteTrainerDto[] = trainers.map((trainer) => {
          const incompleteTrainer = new IncompleteTrainerDto();
-         incompleteTrainer.id = trainer.id;
          incompleteTrainer.fullName = trainer.fullName;
          incompleteTrainer.profile = trainer.profile;
          return incompleteTrainer;

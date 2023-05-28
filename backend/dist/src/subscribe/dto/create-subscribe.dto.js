@@ -11,22 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateSubscribeDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
-class CreateSubscribeDto {
+const subscribe_entity_1 = require("../subscribe.entity");
+class CreateSubscribeDto extends (0, swagger_1.PickType)(subscribe_entity_1.Subscribe, ['name', 'description', 'cost']) {
 }
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Тренажерный зал', description: 'Название абонемента' }),
-    __metadata("design:type", String)
-], CreateSubscribeDto.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Абонемент включает в себя...', description: "Описание абонемента" }),
-    __metadata("design:type", String)
-], CreateSubscribeDto.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: '10000', description: "Стоимость абонемента" }),
-    __metadata("design:type", Number)
-], CreateSubscribeDto.prototype, "cost", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ examples: [1, 2], description: "Список клиентов" }),
+    (0, swagger_1.ApiProperty)({ example: [], description: "Список клиентов", type: [String] }),
     __metadata("design:type", Array)
 ], CreateSubscribeDto.prototype, "clients", void 0);
 exports.CreateSubscribeDto = CreateSubscribeDto;

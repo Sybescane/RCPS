@@ -23,15 +23,15 @@ export class ClientsController{
    }
 
    @ApiOperation({summary: 'Поиск конкретного клиента'})
-   @Get(':id')
-   findOne(@Param('id') id: string): Promise<Client>{
-      return this.clientsService.findOne(+id);
+   @Get(':email')
+   findOne(@Param('email') email: string): Promise<Client>{
+      return this.clientsService.findOne(email);
    }
 
    @ApiOperation({summary: 'Изменение клиента'})
-   @Put(':id')
-   update(@Param('id') id: string, @Body() updateClient: Client){
-      return this.clientsService.update(+id, updateClient)
+   @Put(':email')
+   update(@Param('email') email: string, @Body() updateClient: Client){
+      return this.clientsService.update(email, updateClient)
    }
 
    @ApiOperation({summary: 'Создание клиента'})
@@ -41,8 +41,8 @@ export class ClientsController{
    }
 
    @ApiOperation({summary: 'Удаление клиента'})
-   @Delete(':id')
-   remove(@Param('id') id: string){
-      return this.clientsService.remove(+id);
+   @Delete(':email')
+   remove(@Param('email') email: string){
+      return this.clientsService.remove(email);
    }
 }

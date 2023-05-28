@@ -1,15 +1,7 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, PickType } from "@nestjs/swagger";
+import { Subscribe } from "../subscribe.entity";
 
-export class CreateSubscribeDto{
-   @ApiProperty({example: 'Тренажерный зал', description: 'Название абонемента'}) 
-   name: string;
-
-   @ApiProperty({example: 'Абонемент включает в себя...', description: "Описание абонемента"})
-   description: string;
-
-   @ApiProperty({example: '10000', description: "Стоимость абонемента"})
-   cost: number;
-
-   @ApiProperty({examples: [1,2], description: "Список клиентов"})
-   clients: number[];
+export class CreateSubscribeDto extends PickType(Subscribe, ['name', 'description', 'cost'] as const){
+   @ApiProperty({example: [], description: "Список клиентов", type: [String]})
+   clients: string[];
 }
