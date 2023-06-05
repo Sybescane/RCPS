@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Init1685290394226 implements MigrationInterface {
-    name = 'Init1685290394226'
+export class Init1685707483571 implements MigrationInterface {
+    name = 'Init1685707483571'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "subscribe" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "description" character varying NOT NULL, "cost" integer NOT NULL, CONSTRAINT "PK_3e91e772184cd3feb30688ef1b8" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "subscribe" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "description" character varying NOT NULL, "cost" integer NOT NULL, CONSTRAINT "UQ_99c928aee7fdad753f604a54bab" UNIQUE ("name"), CONSTRAINT "PK_3e91e772184cd3feb30688ef1b8" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "trainers" ("id" SERIAL NOT NULL, "fullName" character varying NOT NULL, "profile" character varying NOT NULL, "experience" integer NOT NULL, CONSTRAINT "PK_198da56395c269936d351ab774b" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "clients" ("id" SERIAL NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "fullName" character varying NOT NULL, "age" integer NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "UQ_b48860677afe62cd96e12659482" UNIQUE ("email"), CONSTRAINT "PK_f1ab7cf3a5714dbc6bb4e1c28a4" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "client_trainer" ("client_id" integer NOT NULL, "trainer_id" integer NOT NULL, CONSTRAINT "PK_bd093208395bb01b8e389967c07" PRIMARY KEY ("client_id", "trainer_id"))`);
@@ -16,7 +16,7 @@ export class Init1685290394226 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "client_trainer" ADD CONSTRAINT "FK_854ef81025d08a3cee547a80f44" FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
         await queryRunner.query(`ALTER TABLE "client_trainer" ADD CONSTRAINT "FK_144027bcd24de925a8fe2fa8115" FOREIGN KEY ("trainer_id") REFERENCES "trainers"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "client_subscribe" ADD CONSTRAINT "FK_d81bb1f392f7286f5ccd36f849f" FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
-        await queryRunner.query(`ALTER TABLE "client_subscribe" ADD CONSTRAINT "FK_80bc9b610e86391b9b7a4ec8264" FOREIGN KEY ("subscribe_id") REFERENCES "subscribe"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "client_subscribe" ADD CONSTRAINT "FK_80bc9b610e86391b9b7a4ec8264" FOREIGN KEY ("subscribe_id") REFERENCES "subscribe"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

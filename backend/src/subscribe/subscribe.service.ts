@@ -18,10 +18,6 @@ export class SubscribesService{
       subscribe.name = subscribeDto.name;
       subscribe.description = subscribeDto.description;
       subscribe.cost = subscribeDto.cost;
-      const clients = await this.clientRepository.findBy({
-         email: In(subscribeDto.clients)
-      });
-      subscribe.clients = clients;
       await this.subscribeRepository.save(subscribe);
       return subscribe;
    }

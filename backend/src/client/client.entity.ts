@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength } from "class-validator";
+import { IsEmail, IsInt, IsNotEmpty, IsString, Max, Min, MinLength } from "class-validator";
 import { Subscribe } from "src/subscribe/subscribe.entity";
 import { Trainer } from "src/trainers/trainers.entity";
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 
 @Entity('clients')
 @Unique(['email'])
@@ -17,7 +17,7 @@ export class Client{
    email: string;
 
    @IsNotEmpty({message: 'Заполните поле password'})
-   @MinLength(8)
+   @MinLength(8, {message: 'Минимальная длина пароля - 8'})
    @ApiProperty({example: 'qwerty12345678', description: 'Password', type: String, minLength: 8})
    @Column({})
    password: string;
@@ -43,7 +43,7 @@ export class Client{
    @UpdateDateColumn()
    updatedAt: Date
 
-   @ManyToMany(() => Trainer, (trainer) => trainer.clients)
+   @ManyToMany(() => Trainer, (trainer) => trainer.clients, {cascade: true})
    @JoinTable({
       name: 'client_trainer',
       joinColumn: {name :'client_id'},
@@ -51,11 +51,11 @@ export class Client{
    })
    trainers: Trainer[]
 
-   @ManyToMany(() => Subscribe, (subscribe) => subscribe.clients)
+   @ManyToMany(() => Subscribe, (subscribe) => subscribe.clients, {cascade: true})
    @JoinTable({
       name: 'client_subscribe',
       joinColumn: { name: 'client_id'},
-      inverseJoinColumn: { name: 'subscribe_id'}
+      inverseJoinColumn: { name: 'subscribe_id'},
    })
    subscribes: Subscribe[];
 

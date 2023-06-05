@@ -28,6 +28,6 @@ export class Trainer{
    @Column()
    experience: number;
 
-   @ManyToMany(() => Client, (client) => client.trainers)
+   @ManyToMany(() => Client, (client) => client.trainers, {onDelete: "CASCADE"})
    clients: Client[];   
 }

@@ -43,7 +43,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Trainer.prototype, "experience", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => client_entity_1.Client, (client) => client.trainers),
+    (0, typeorm_1.ManyToMany)(() => client_entity_1.Client, (client) => client.trainers, { onDelete: "CASCADE" }),
     __metadata("design:type", Array)
 ], Trainer.prototype, "clients", void 0);
 Trainer = __decorate([

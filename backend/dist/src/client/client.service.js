@@ -26,23 +26,6 @@ let ClientService = class ClientService {
         this.trainerRepository = trainerRepository;
         this.subscribeRepository = subscribeRepository;
     }
-    async create(clientDto) {
-        const client = this.clientRepository.create();
-        client.email = clientDto.email;
-        client.password = clientDto.password;
-        client.fullName = clientDto.fullName;
-        client.age = clientDto.age;
-        const subscribes = await this.subscribeRepository.findBy({
-            id: (0, typeorm_2.In)(clientDto.subscribes)
-        });
-        const trainers = await this.trainerRepository.findBy({
-            id: (0, typeorm_2.In)(clientDto.trainers)
-        });
-        client.subscribes = subscribes;
-        client.trainers = trainers;
-        await this.clientRepository.save(client);
-        return client;
-    }
     async findOne(email) {
         return await this.clientRepository.findOne({
             where: { email },
@@ -64,12 +47,9 @@ let ClientService = class ClientService {
         const client = await this.clientRepository.findOne({
             where: { email }
         });
-        client.email = updatedClient.email;
         client.password = updatedClient.password;
         client.fullName = updatedClient.fullName;
         client.age = updatedClient.age;
-        client.trainers = updatedClient.trainers;
-        client.subscribes = updatedClient.subscribes;
         await this.clientRepository.save(client);
         return client;
     }
@@ -85,6 +65,34 @@ let ClientService = class ClientService {
             return incompleteClient;
         });
         return incompleteClients;
+    }
+    async addSubscribe(email, idSubscribe) {
+        const client = await this.findOne(email);
+        const subscribe = await this.subscribeRepository.findOneBy({ id: idSubscribe });
+        client.subscribes.push(subscribe);
+        await this.clientRepository.save(client);
+        return client;
+    }
+    async delSubscribe(email, idSub) {
+        const client = await this.findOne(email);
+        const index = client.subscribes.findIndex(item => item.id === idSub);
+        client.subscribes.splice(index, 1);
+        await this.clientRepository.save(client);
+        return client;
+    }
+    async addTrainer(email, idTrainer) {
+        const client = await this.findOne(email);
+        const trainer = await this.trainerRepository.findOneBy({ id: idTrainer });
+        client.trainers.push(trainer);
+        await this.clientRepository.save(client);
+        return client;
+    }
+    async delTrainer(email, idTrainer) {
+        const client = await this.findOne(email);
+        const index = client.trainers.findIndex(item => item.id === idTrainer);
+        client.trainers.splice(index, 1);
+        await this.clientRepository.save(client);
+        return client;
     }
 };
 ClientService = __decorate([

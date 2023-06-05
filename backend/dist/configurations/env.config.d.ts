@@ -1,5 +1,6 @@
 declare const _default: () => {
     port: number;
+    jwt: string;
     database: {
         type: string;
         host: string;

@@ -16,7 +16,8 @@ import { TrainersModule } from './trainers/trainers.module';
   ConfigModule.forRoot({
     isGlobal: true,
     load: [config]
-  })],
+  }),
+  ],
   controllers: [],
   providers: [],
 })

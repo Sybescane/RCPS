@@ -1,9 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsNotEmpty, IsString, Min, MinLength } from "class-validator";
 import { Client } from "src/client/client.entity";
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable, Unique } from "typeorm";
 
 @Entity('subscribe')
+@Unique(['name'])
 export class Subscribe{
    @PrimaryGeneratedColumn()
    @ApiProperty({example: '1', description: "Уникальный идентификатор"})
@@ -28,6 +29,6 @@ export class Subscribe{
    @Column()
    cost: number;
 
-   @ManyToMany(() => Client, (client) => client.subscribes)
+   @ManyToMany(() => Client, (client) => client.subscribes, {onDelete: "CASCADE"})
    clients: Client[]
 }

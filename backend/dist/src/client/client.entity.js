@@ -30,7 +30,7 @@ __decorate([
 ], Client.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'Заполните поле password' }),
-    (0, class_validator_1.MinLength)(8),
+    (0, class_validator_1.MinLength)(8, { message: 'Минимальная длина пароля - 8' }),
     (0, swagger_1.ApiProperty)({ example: 'qwerty12345678', description: 'Password', type: String, minLength: 8 }),
     (0, typeorm_1.Column)({}),
     __metadata("design:type", String)
@@ -61,7 +61,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Client.prototype, "updatedAt", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => trainers_entity_1.Trainer, (trainer) => trainer.clients),
+    (0, typeorm_1.ManyToMany)(() => trainers_entity_1.Trainer, (trainer) => trainer.clients, { cascade: true }),
     (0, typeorm_1.JoinTable)({
         name: 'client_trainer',
         joinColumn: { name: 'client_id' },
@@ -70,11 +70,11 @@ __decorate([
     __metadata("design:type", Array)
 ], Client.prototype, "trainers", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => subscribe_entity_1.Subscribe, (subscribe) => subscribe.clients),
+    (0, typeorm_1.ManyToMany)(() => subscribe_entity_1.Subscribe, (subscribe) => subscribe.clients, { cascade: true }),
     (0, typeorm_1.JoinTable)({
         name: 'client_subscribe',
         joinColumn: { name: 'client_id' },
-        inverseJoinColumn: { name: 'subscribe_id' }
+        inverseJoinColumn: { name: 'subscribe_id' },
     }),
     __metadata("design:type", Array)
 ], Client.prototype, "subscribes", void 0);

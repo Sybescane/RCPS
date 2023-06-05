@@ -20,7 +20,8 @@ ClientModule = __decorate([
     (0, common_1.Module)({
         controllers: [client_controller_1.ClientsController],
         providers: [client_service_1.ClientService],
-        imports: [typeorm_1.TypeOrmModule.forFeature([client_entity_1.Client, subscribe_entity_1.Subscribe, trainers_entity_1.Trainer])]
+        imports: [typeorm_1.TypeOrmModule.forFeature([client_entity_1.Client, subscribe_entity_1.Subscribe, trainers_entity_1.Trainer])],
+        exports: [client_service_1.ClientService]
     })
 ], ClientModule);
 exports.ClientModule = ClientModule;

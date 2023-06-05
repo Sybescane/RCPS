@@ -27,7 +27,7 @@ AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 load: [env_config_1.default]
-            })],
+            }),],
         controllers: [],
         providers: [],
     })

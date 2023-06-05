@@ -44,11 +44,12 @@ __decorate([
     __metadata("design:type", Number)
 ], Subscribe.prototype, "cost", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => client_entity_1.Client, (client) => client.subscribes),
+    (0, typeorm_1.ManyToMany)(() => client_entity_1.Client, (client) => client.subscribes, { onDelete: "CASCADE" }),
     __metadata("design:type", Array)
 ], Subscribe.prototype, "clients", void 0);
 Subscribe = __decorate([
-    (0, typeorm_1.Entity)('subscribe')
+    (0, typeorm_1.Entity)('subscribe'),
+    (0, typeorm_1.Unique)(['name'])
 ], Subscribe);
 exports.Subscribe = Subscribe;
 //# sourceMappingURL=subscribe.entity.js.map

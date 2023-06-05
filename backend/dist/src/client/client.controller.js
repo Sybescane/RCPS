@@ -14,10 +14,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientsController = void 0;
 const client_service_1 = require("./client.service");
-const client_entity_1 = require("./client.entity");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
-const create_client_dto_1 = require("./dto/create-client.dto");
+const update_client_dto_1 = require("./dto/update-client.dto");
 let ClientsController = class ClientsController {
     constructor(clientsService) {
         this.clientsService = clientsService;
@@ -34,8 +33,17 @@ let ClientsController = class ClientsController {
     update(email, updateClient) {
         return this.clientsService.update(email, updateClient);
     }
-    create(createClient) {
-        return this.clientsService.create(createClient);
+    addSubcribe(email, idSub) {
+        return this.clientsService.addSubscribe(email, idSub);
+    }
+    delSubcribe(email, idSub) {
+        return this.clientsService.delSubscribe(email, idSub);
+    }
+    addTrainer(email, idTrainer) {
+        return this.clientsService.addTrainer(email, idTrainer);
+    }
+    delTrainer(email, idSub) {
+        return this.clientsService.delTrainer(email, idSub);
     }
     remove(email) {
         return this.clientsService.remove(email);
@@ -69,17 +77,45 @@ __decorate([
     __param(0, (0, common_1.Param)('email')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, client_entity_1.Client]),
+    __metadata("design:paramtypes", [String, update_client_dto_1.UpdateClientDto]),
     __metadata("design:returntype", void 0)
 ], ClientsController.prototype, "update", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'Создание клиента' }),
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    (0, swagger_1.ApiOperation)({ summary: 'оформить подписку на абонемент' }),
+    (0, common_1.Post)('addSub'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('idSub')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_client_dto_1.CreateClientDto]),
+    __metadata("design:paramtypes", [String, Number]),
     __metadata("design:returntype", Promise)
-], ClientsController.prototype, "create", null);
+], ClientsController.prototype, "addSubcribe", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'отменить подписку на абонемент' }),
+    (0, common_1.Post)('delSub'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('idSub')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:returntype", Promise)
+], ClientsController.prototype, "delSubcribe", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'записаться к тренеру' }),
+    (0, common_1.Post)('addTrainer'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('idSub')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:returntype", Promise)
+], ClientsController.prototype, "addTrainer", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'отписаться от тренера' }),
+    (0, common_1.Post)('delTrainer'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('idSub')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:returntype", Promise)
+], ClientsController.prototype, "delTrainer", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Удаление клиента' }),
     (0, common_1.Delete)(':email'),
